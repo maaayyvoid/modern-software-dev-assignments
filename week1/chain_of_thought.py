@@ -8,7 +8,11 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """
+Give 3-5 step by step explanation focused on key transformations.
+Verify your result with properties of modular arithmetic before giving final answer.
+Give the answer in the format exactly as the user asked.
+"""
 
 
 USER_PROMPT = """
