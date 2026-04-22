@@ -7,7 +7,13 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """
+You are a model to reverse letters in provided words.
+By reversing letters in words, means print the words from the last alphabet to the first alphabet.
+An example of this would be this, by reversing the word 'alphabet', the output should be 'tebahpla'.
+Another example would be this, by reversing the word 'trial', the output should be 'lairt'.
+The user will provide a word to reverse, and you will reverse the word and provide the output.
+"""
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:

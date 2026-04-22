@@ -46,7 +46,81 @@ ollama run llama3.1:8b
 
 ###  K-shot prompting
 
+K-shot: providing the model with k examples of the desired input-output pairs before presenting the actual prompt.
 
+#### My initial attempt:
+
+```python
+YOUR_SYSTEM_PROMPT = """
+Reverse the order of letters in the provided word. 
+An example, input word is 'eleven', output should be 'nevele'.
+Another example would be input word is 'thursday', output should be 'yadsruht'.
+"""
+```
+
+
+
+Result:
+
+```bash
+Running test 1 of 5
+Expected output: sutatsptth
+Actual output: 201tssuots
+Running test 2 of 5
+Expected output: sutatsptth
+Actual output: 204tsatsuP
+Running test 3 of 5
+Expected output: sutatsptth
+Actual output: satsuptoh
+Running test 4 of 5
+Expected output: sutatsptth
+Actual output: 201tsatsop
+Running test 5 of 5
+Expected output: sutatsptth
+Actual output: 402thgip
+
+```
+
+Hey, it does not make any sense at all. As if the system prompt does not make any contribution to the correctness of the result.
+
+
+
+#### My second attempt
+
+I guess it's because the model does not understand the task through the examples I provide. So I tried to explain it more clearly.
+
+```python
+YOUR_SYSTEM_PROMPT = """
+You are a model to reverse letters in provided words.
+By reversing letters in words, means print the words from the last alphabet to the first alphabet.
+An example of this would be this, by reversing the word 'alphabet', the output should be 'tebahpla'.
+Another example would be this, by reversing the word 'trial', the output should be 'lairt'.
+"""
+```
+
+
+
+Result:
+
+```bash
+Running test 1 of 5
+Expected output: sutatsptth
+Actual output: tsopthg
+Running test 2 of 5
+Expected output: sutatsptth
+Actual output: tsopthg
+Running test 3 of 5
+Expected output: sutatsptth
+Actual output: tsuxpoth
+Running test 4 of 5
+Expected output: sutatsptth
+Actual output: tsopthg
+Running test 5 of 5
+Expected output: sutatsptth
+Actual output: tsuottahp
+```
+
+Hey, at least there is no numbers any more. But it's still quite far away from the expected output.
 
 
 
