@@ -124,6 +124,124 @@ Hey, at least there is no numbers any more. But it's still quite far away from t
 
 
 
+#### My third attempt
+
+I googled the similar question. Someone also did the similar course! 
+
+Reference: https://medium.com/@sami93sami93/how-prompting-techniques-transformed-the-llms-we-use-today-2bf2134c39b0 
+
+
+
+```
+You are a model to reverse letters in provided words. This means print the words from the last letter to the first letter. 
+There is no chunk in the word, treat each letter in the word separately. 
+Same input should generate the exact same output. 
+
+Examples: 
+
+Example 1:
+Input: alphabet
+Output: tebahpla
+
+Example 2:
+Input: trial
+Output: lairt
+
+Example 3:
+Input: http
+Output: ptth
+
+Here are some examples with correct & wrong output:
+Example 4:
+Input: generativehttp
+Output: ptthtiveragene # WRONG
+Output: ptthtivegenera # WRONG
+Output: ptthtivegenera # WRONG
+Output: ptthevitareneg # CORRECT
+```
+
+
+
+Result:
+
+```
+Running test 1 of 5
+Expected output: sutatsptth
+Actual output: sutatshttp
+Running test 2 of 5
+Expected output: sutatsptth
+Actual output: sutatshttp
+Running test 3 of 5
+Expected output: sutatsptth
+Actual output: sutatshttp
+Running test 4 of 5
+Expected output: sutatsptth
+Actual output: ptthatsu
+Running test 5 of 5
+Expected output: sutatsptth
+Actual output: sutatshttp
+```
+
+
+
+Feedback from GPT:
+
+1. Autoregressive models may absorb these as plausible continuations. So these may hurt experience. 
+
+   ```
+   Here are some examples with correct & wrong output:
+   Example 4:
+   Input: generativehttp
+   Output: ptthtiveragene # WRONG
+   Output: ptthtivegenera # WRONG
+   Output: ptthtivegenera # WRONG
+   Output: ptthevitareneg # CORRECT
+   ```
+
+   I guess I will start with removing these examples.
+
+2. Instruction is abstract.
+
+   ```
+   treat each letter separately
+   ```
+
+   This is difficult for the model to operate. It's better to give explicit algorithm.
+
+   Suggested logic:
+
+   ```
+   You reverse words by processing one character at a time.
+   
+   Algorithm:
+   1. Read every character in the input from left to right.
+   2. Store every character individually.
+   3. Output the exact same characters in reverse order.
+   4. Do not preserve common substrings like "http", "ing", "tion", or words.
+   5. Treat every symbol as an individual character.
+   
+   Examples:
+   xxx
+   
+   Output only the reversed string.
+   ```
+
+3. Determinism is mostly controlled by decoding parameters (`temperature`, `top_p`)—which you said you cannot change.
+
+   So ask:
+
+   Is that sentence helping the transformation logic?
+
+   Or just consuming prompt space?
+
+   ```
+   Same input should generate the exact same output.
+   ```
+
+   
+
+
+
 ### Chain-of-thought
 
 #### My initial attempt:

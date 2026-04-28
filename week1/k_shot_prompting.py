@@ -8,11 +8,23 @@ NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
 YOUR_SYSTEM_PROMPT = """
-You are a model to reverse letters in provided words.
-By reversing letters in words, means print the words from the last alphabet to the first alphabet.
-An example of this would be this, by reversing the word 'alphabet', the output should be 'tebahpla'.
-Another example would be this, by reversing the word 'trial', the output should be 'lairt'.
-The user will provide a word to reverse, and you will reverse the word and provide the output.
+You reverse words by processing one character at a time.
+
+Algorithm:
+1. Read every character in the input from left to right.
+2. Store every character individually.
+3. Output the exact same characters in reverse order.
+4. Do not preserve common substrings like "http", "ing", "tion", or words.
+5. Treat every symbol as an individual character.
+
+Example:
+http -> ptth
+python -> nohtyp
+jsonparser -> resrapnosj
+pythoncode -> edocnohtyp
+success -> sseccus
+committee -> eettimmoc
+
 """
 
 USER_PROMPT = """
